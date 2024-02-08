@@ -29,6 +29,8 @@ import net.notbrianbob.lightoverlay.LightLevel;
 
 @Mod(LightOverlay.MOD_ID)
 public class LightOverlay {
+    private static boolean isOverlayEnabled = false; // Tracks the state of the overlay
+    private static boolean keyWasPressed = false; // Tracks if the key was already pressed
     public static final String MOD_ID = "lightoverlay";
     private static final Logger LOGGER = LogUtils.getLogger();
     // Define the KeyMapping as a static field so, it can be accessed in the event handler
@@ -54,11 +56,23 @@ public class LightOverlay {
     );
 
     @SubscribeEvent
-    public void onClientTick(ClientTickEvent event) {
+    public static void onClientTick(ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
-            if (lightOverlayToggleKey.isDown()) {
-                // Call the method to check and update light levels around the player
-                LightLevel.checkLightLevelsAroundPlayer();
+            boolean isCurrentlyPressed = lightOverlayToggleKey.isDown();
+            if (isCurrentlyPressed && !keyWasPressed) {
+                // Toggle the overlay state only if the key was not already pressed
+                isOverlayEnabled = !isOverlayEnabled;
+                keyWasPressed = true; // Mark key as pressed
+
+                if (isOverlayEnabled) {
+                    // Logic to enable the overlay
+                    LightLevel.checkLightLevelsAroundPlayer();
+                } else {
+                    // Logic to disable the overlay, if needed
+                }
+            } else if (!isCurrentlyPressed && keyWasPressed) {
+                // Reset keyWasPressed if the key is released
+                keyWasPressed = false;
             }
         }
     }
