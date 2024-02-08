@@ -8,7 +8,6 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 @Mod.EventBusSubscriber(modid = LightOverlay.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Config {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-
     // Configuration for the overlay type
     public static final ForgeConfigSpec.EnumValue<OverlayType> OVERLAY_TYPE;
 
@@ -17,7 +16,7 @@ public class Config {
     static {
         // Inside your configuration setup
         LIGHT_OVERLAY_TOGGLE_KEY = BUILDER
-                .comment("Key for toggling the Light Overlay(NotWorking!)")
+                .comment("Key for toggling the Light Overlay")
                 .define("lightOverlayToggleKey", "key.keyboard.f7"); // Default key as F7
     }
     static {
