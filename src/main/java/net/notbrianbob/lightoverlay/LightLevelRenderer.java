@@ -19,7 +19,7 @@ import net.minecraftforge.client.event.RenderLevelStageEvent;
 
 import com.mojang.math.MatrixUtil;
 
-@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.FORGE)
+//@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.FORGE)
 public class LightLevelRenderer {
 
     @SubscribeEvent
@@ -69,6 +69,4 @@ public class LightLevelRenderer {
         poseStack.popPose();
         buffer.endBatch();
     }
-
-
 }
